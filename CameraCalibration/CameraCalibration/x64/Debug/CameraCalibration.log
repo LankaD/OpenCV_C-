@@ -1,0 +1,7 @@
+﻿  main_CameraCalibration.cpp
+c:\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
+c:\users\jai\documents\opencv_c-\cameracalibration\cameracalibration\main_cameracalibration.cpp(95): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+c:\users\jai\documents\opencv_c-\cameracalibration\cameracalibration\main_cameracalibration.cpp(108): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  CameraCalibration.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\CameraCalibration\x64\Debug\CameraCalibration.exe
+  CameraCalibration.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\CameraCalibration\x64\Debug\CameraCalibration.pdb (Partial PDB)
