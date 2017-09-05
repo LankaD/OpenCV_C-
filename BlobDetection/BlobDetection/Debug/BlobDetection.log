@@ -1,0 +1,21 @@
+﻿Build started 9/1/2017 4:07:18 PM.
+     1>Project "C:\Users\lank_di\Documents\Visual Studio 2013\Projects\BlobDetection\BlobDetection\BlobDetection.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /I"C:\Users\lank_di\Documents\Visual Studio 2013\Projects\BlobDetection\packages\OpenCV.2.4.11\build\native\../../build/native/include/" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_OPENCV /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt BlobDetection_main.cpp
+         BlobDetection_main.cpp
+     1>c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(15): error C2143: syntax error : missing ';' before '.'
+     1>c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(15): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(15): error C2371: 'detector' : redefinition; different basic types
+                 c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(11) : see declaration of 'detector'
+     1>c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(20): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(20): error C2078: too many initializers
+     1>c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(23): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(23): error C2078: too many initializers
+     1>c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(23): error C2440: 'initializing' : cannot convert from 'cv::Mat' to 'int'
+                 No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+     1>c:\users\lank_di\documents\visual studio 2013\projects\blobdetection\blobdetection\blobdetection_main.cpp(24): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+     1>Done Building Project "C:\Users\lank_di\Documents\Visual Studio 2013\Projects\BlobDetection\BlobDetection\BlobDetection.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:00.69
