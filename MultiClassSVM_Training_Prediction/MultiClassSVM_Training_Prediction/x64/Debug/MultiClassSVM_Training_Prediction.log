@@ -1,0 +1,5 @@
+﻿  main.cpp
+c:\users\jai\documents\opencv_c-\multiclasssvm_training_prediction\multiclasssvm_training_prediction\main.cpp(144): warning C4244: 'initializing': conversion from 'float' to 'int', possible loss of data
+c:\users\jai\documents\opencv_c-\multiclasssvm_training_prediction\multiclasssvm_training_prediction\main.cpp(39): warning C4715: 'checkPath': not all control paths return a value
+  MultiClassSVM_Training_Prediction.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\MultiClassSVM_Training_Prediction\x64\Debug\MultiClassSVM_Training_Prediction.exe
+  MultiClassSVM_Training_Prediction.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\MultiClassSVM_Training_Prediction\x64\Debug\MultiClassSVM_Training_Prediction.pdb (Partial PDB)
