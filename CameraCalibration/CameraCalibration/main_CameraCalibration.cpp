@@ -73,7 +73,8 @@ void cameraCalibration(vector<Mat>& images, Size& calibrationBoardSize, float& c
 	createCalibrationGridCornerCoordinates(calibrationBoardSize, calibrationGridEdgeLength, objectPoints[0]);
 	objectPoints.resize(imagePoints.size(), objectPoints[0]);
 	//calibrating camera
-	calibrateCamera(objectPoints, imagePoints, calibrationBoardSize, cameraIntrinsics, cameraDistortions, rvecs, tvecs);
+	double reprojectionerror = calibrateCamera(objectPoints, imagePoints, calibrationBoardSize, cameraIntrinsics, cameraDistortions, rvecs, tvecs);
+	cout << reprojectionerror << endl;
 	cout << "Exiting cameraCalibration() function\n";
 }
 

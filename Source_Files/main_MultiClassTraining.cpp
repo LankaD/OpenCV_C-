@@ -17,8 +17,10 @@ using namespace cv;
 bool checkPath(const string& filepath);
 void loadImagesFromDirectory(const string& filepath, vector<Mat>& imageFiles);
 void computeHOGFeatures(const vector<Mat>& images, vector<Mat>& HOGFeatures, const Size& wSize);
-void convert_to_ml(const vector<Mat > & train_samples, Mat& trainData);
+void convertToSVMReadable(const vector<Mat > & train_samples, Mat& trainData);
 void trainMultiClassSVM(const vector<Mat>& features, const vector<int>& labels);
+void svmPredictImage(vector<Mat>& testImages, Size& imageSize);
+Size imageSize(100, 100);
 
 bool checkPath(const string& filepath)
 {
@@ -44,6 +46,7 @@ void loadImagesFromDirectory(const string& filepath, vector<Mat>& imageFiles)
 	for (size_t i = 0; i < filesInFolder.size(); i++)
 	{
 		image = imread(filesInFolder[i], IMREAD_UNCHANGED);
+		resize(image, image, imageSize);
 		imageFiles.push_back(image);
 	}
 }
@@ -73,6 +76,10 @@ void computeHOGFeatures(const vector<Mat>& images, vector<Mat>& HOGFeatures, con
 		{
 			cvtColor(image, image, CV_BGR2GRAY);
 		}
+		else if (image.channels() > 3)
+		{
+			cvtColor(image, image, CV_BGR2GRAY);
+		}
 		hog.compute(image, featureVector, Size(8, 8), Size(8, 8));
 		HOGFeatures.push_back(Mat(featureVector).clone());		
 	}	
@@ -83,7 +90,7 @@ void computeHOGFeatures(const vector<Mat>& images, vector<Mat>& HOGFeatures, con
 * TrainData is a matrix of size (#samples x max(#cols,#rows) per samples), in 32FC1.
 * Transposition of samples are made if needed.
 */
-void convert_to_ml(const vector<Mat > & train_samples, Mat& trainData)
+void convertToSVMReadable(const vector<Mat > & train_samples, Mat& trainData)
 {
 	const int rows = (int)train_samples.size();
 	const int cols = (int)max(train_samples[0].cols, train_samples[0].rows);
@@ -111,18 +118,46 @@ void convert_to_ml(const vector<Mat > & train_samples, Mat& trainData)
 void trainMultiClassSVM(const vector<Mat>& features, const vector<int>& labels)
 {
 	Mat traindata;
-	convert_to_ml(features, traindata);
+	CvSVMParams parameters;
+	parameters.svm_type = CvSVM::C_SVC;
+	convertToSVMReadable(features, traindata);
 	CvSVM svm;
-	/*CvSVMParams params;
-	params.coef0 = (0, 0);
-	params.degree = 3;
-	param*/
 	svm.train(traindata, Mat(labels), Mat(), Mat());
 	svm.save("svm_trial.xml");
 }
 
+void svmPredictImage(vector<Mat>& testImages, Size& imageSize)
+{
+	vector<Mat> featuredescriptors;
+	CvSVM svmTest;
+	Mat svmReadableImage, testImage;
+	testImage = testImages[0];
+	resize(testImage, testImage, imageSize);	
+	computeHOGFeatures(testImages, featuredescriptors, Size(96, 96));
+	svmReadableImage = featuredescriptors[0];
+	svmReadableImage = svmReadableImage.reshape(0, 1);
+	cout << "Loading SVM XML\n";
+	svmTest.load("svm_trial.xml");
+	cout << "SVM loaded\n";
+	int response = svmTest.predict(svmReadableImage);
+	if (response == 0)
+	{
+		cout << "Black Marker with white background\n";
+	}
+	else if (response == 1)
+		 {
+			 cout << "White Marker with black background\n";
+		 }
+		 else
+		 {
+			 cout << "Background image\n";
+		 }
+}
+
 int main(int argc, char**argv)
 {
+	vector<Mat> testImages;
+	Mat testImage;
 	//Declaring variables
 	vector<Mat> blackMarkerImages, whiteMarkerImages, backgroundImages, blackMarkerHOGFeatures, whiteMarkerHOGFeatures,  backgroundImagesHOGFeatures, featuredescriptors;
 	Size wSize = Size(96, 96);
@@ -159,6 +194,12 @@ int main(int argc, char**argv)
 	computeHOGFeatures(whiteMarkerImages, featuredescriptors, Size(96, 96));//white markers with black background
 	computeHOGFeatures(backgroundImages, featuredescriptors, Size(96, 96));//background images
 	trainMultiClassSVM(featuredescriptors, labels);
+	/*
+	//testImage = imread("D:\\Markers_UsedForTraining\\SVMTraining\\background\\19161.png", IMREAD_UNCHANGED);
+	testImage = imread("D:\\Markers\\Markers_With_White_Backgrounds\\Negative\\1.png", IMREAD_GRAYSCALE);
+	//testImage = imread("D:\\Markers\\Markers_With_White_Backgrounds\\img.png", IMREAD_GRAYSCALE);
+	testImages.push_back(testImage);
+	//svmPredictImage(testImages, imageSize);*/
 	system("pause");
 	return 0;
 }
