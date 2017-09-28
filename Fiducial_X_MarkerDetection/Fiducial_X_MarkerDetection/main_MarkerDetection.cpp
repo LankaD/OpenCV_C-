@@ -7,6 +7,7 @@
 #include "opencv2\objdetect\objdetect.hpp"
 #include "opencv2\opencv.hpp"
 
+
 using namespace std;
 using namespace cv;
 
@@ -16,21 +17,66 @@ inline bool fileExists(const string& name)
 	return (stat(name.c_str(), &buffer) == 0);
 }
 
-void markerClassifierDetection(const string& imagePath, const string& classifierPath, vector<Rect>& boundingBoxInfo, CascadeClassifier& markerDetector, Mat& image)
+void markerClassifierDetection(const string& imagePath, const string& classifierPath, vector<Rect>& boundingBoxInfo, CascadeClassifier& markerDetector, Mat& image, bool showDetectedObjects)
 {
 	markerDetector.load(classifierPath);
 	image = imread(imagePath, IMREAD_GRAYSCALE);
 	markerDetector.detectMultiScale(image, boundingBoxInfo, 1.1, 3, 0, Size(10, 10));
-	if (boundingBoxInfo.size()>0)
-	{
+	if ((boundingBoxInfo.size()>0) && showDetectedObjects==true)
+	{		
 		for (vector<Rect>::iterator r = boundingBoxInfo.begin(); r != boundingBoxInfo.end(); ++r)
 		{
 			Rect objectBoundary = (*r);
-			rectangle(image, objectBoundary, Scalar(0, 0, 0), 2, 8, 0);
+			rectangle(image, objectBoundary, Scalar(0, 0, 0), 2, 8, 0);			
+		}
+		namedWindow("Image", WINDOW_NORMAL);
+		imshow("Image", image);
+		waitKey(0);
+	}
+	else
+	{
+		if ((boundingBoxInfo.size() == 0))
+		{
+			cout << "No objects detected\n";
 		}
 	}
 }
 
+void cornersDetection(const Mat& image, bool showDetectedCorners)
+{
+	//Parameters for Shi-Tomasi corner detector
+	Mat image_Out;
+	vector<Point2f> corners;
+	double qualityLevel = 0.01;
+	double minDistance = 5;
+	int blockSize = 3, maxCorners = 10;
+	bool useHarrisDetector = false;
+	double k = 0.04;
+	image.copyTo(image_Out);
+	GaussianBlur(image, image_Out, Size(5, 5), 5, 5);
+	//Apply corner detection
+	goodFeaturesToTrack(image_Out, corners, maxCorners, qualityLevel, minDistance, Mat(), blockSize, useHarrisDetector, k);
+	
+	//Drawing detected corners
+	for (int i = 0; i < corners.size(); i++)
+	{
+		circle(image, corners[i], 1, Scalar(0,0,255), -1, 8, 0);
+	}	
+}
+
+void extractObjectROI(const Mat& image, vector<Rect>& boundingBoxInfo, bool showROI)
+{
+	for (vector<Rect>::iterator r = boundingBoxInfo.begin(); r != boundingBoxInfo.end(); ++r)
+	{
+		Rect ROI(r->x, r->y, r->width, r->height);
+		Mat imageROI = image(ROI);
+		cornersDetection(imageROI, true);
+		namedWindow("ROI", WINDOW_KEEPRATIO);
+		imshow("ROI", imageROI);
+		waitKey(0);
+	}
+}
+ 
 int main(int argc, char** argv)
 {
 	Mat image;
@@ -47,17 +93,14 @@ int main(int argc, char** argv)
 	{
 		if ((fileExists(argv[1])) && (fileExists(argv[2])))
 		{
-			markerClassifierDetection(argv[1], argv[2], boundingBoxes, markerDetector, image);
-			namedWindow("Image", WINDOW_NORMAL);
-			imshow("Image", image);
-			waitKey(0);
+			markerClassifierDetection(argv[1], argv[2], boundingBoxes, markerDetector, image, false);
+			extractObjectROI(image, boundingBoxes, true);
 		}
 		else
 		{
 			cout << "Invalid files at directory path. Please verify the files exist.\n";
 			system("pause");
-		}
-		
+		}		
 	}
 	else
 	{
