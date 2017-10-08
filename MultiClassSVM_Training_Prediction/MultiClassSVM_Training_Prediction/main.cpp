@@ -170,12 +170,12 @@ int main(int argc, char**argv)
 	const string whiteMarkerImages_filepath = "E:\\GAC_Files\\Markers\\SVMTraining\\whiteMarker";//white markers with black background
 	const string backgroundImages_filepath = "E:\\GAC_Files\\Markers\\SVMTraining\\background";//background images
 
-																									//Initializing file paths
+	//Initializing file paths
 	filePathIsCorrect_blackMarker = checkPath(blackMarkerImages_filepath);//black markers with white background
 	filePathIsCorrect_whiteMarker = checkPath(whiteMarkerImages_filepath);//white markers with black background
 	filePathIsCorrect_background = checkPath(backgroundImages_filepath); //background images
 
-																		 //File path validation and reading image files from valid file paths'
+	 //File path validation and reading image files from valid file paths'
 	if (filePathIsCorrect_blackMarker && filePathIsCorrect_whiteMarker && filePathIsCorrect_background)
 	{
 		loadImagesFromDirectory(blackMarkerImages_filepath, blackMarkerImages);

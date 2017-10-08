@@ -3,8 +3,10 @@
 #include <windows.h>
 #include "opencv2\objdetect\objdetect.hpp"
 #include "opencv2\opencv.hpp"
+#include "tbb/parallel_for.h"
+#include "tbb/parallel_reduce.h"
 
-
+using namespace tbb;
 using namespace std;
 using namespace cv;
 
@@ -86,7 +88,7 @@ void loadImagesFromDirectory(const string& filepath, vector<Mat>& images)
 	vector<String> filesInFolder;
 	// Reading set of images from a folder
 	glob(filepath, filesInFolder, false);
-	for (size_t i = 0; i < filesInFolder.size(); i++)
+	for(size_t i = 0; i < filesInFolder.size(); i++)
 	{
 		image = imread(filesInFolder[i], IMREAD_GRAYSCALE);
 		images.push_back(image);
@@ -102,6 +104,7 @@ void markerClassifierDetection(vector<Mat>& images, const string& classifierPath
 	vector<Rect>boundingBoxInfo;
 	vector<Point2f>cornersGuess;
 	markerDetector.load(classifierPath);	
+	
 	for (vector<Mat>::iterator i = images.begin(); i != images.end(); i++)
 	{
 		image = *i;
