@@ -1,0 +1,8 @@
+﻿  Source.cpp
+c:\users\jai\documents\opencv_c-\threading_test\threading_test\source.cpp(14): warning C4311: 'type cast': pointer truncation from 'void *' to 'long'
+c:\users\jai\documents\opencv_c-\threading_test\threading_test\source.cpp(14): warning C4302: 'type cast': truncation from 'void *' to 'long'
+c:\users\jai\documents\opencv_c-\threading_test\threading_test\source.cpp(27): warning C4312: 'type cast': conversion from 'int' to 'void *' of greater size
+Source.obj : error LNK2019: unresolved external symbol __imp_pthread_create referenced in function main
+Source.obj : error LNK2019: unresolved external symbol __imp_pthread_exit referenced in function main
+pthreadVC2.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+C:\Users\JAI\Documents\OpenCV_C-\Threading_Test\x64\Debug\Threading_Test.exe : fatal error LNK1120: 2 unresolved externals

@@ -1,8 +1,2 @@
-﻿  main_MarkerDetection.cpp
-c:\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
-c:\users\jai\documents\opencv_c-\fiducial_x_markerdetection\fiducial_x_markerdetection\main_markerdetection.cpp(150): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\jai\documents\opencv_c-\fiducial_x_markerdetection\fiducial_x_markerdetection\main_markerdetection.cpp(151): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-c:\users\jai\documents\opencv_c-\fiducial_x_markerdetection\fiducial_x_markerdetection\main_markerdetection.cpp(80): warning C4715: 'checkPath': not all control paths return a value
-  Fiducial_X_MarkerDetection.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\Fiducial_X_MarkerDetection\x64\Debug\Fiducial_X_MarkerDetection.exe
+﻿  Fiducial_X_MarkerDetection.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\Fiducial_X_MarkerDetection\x64\Debug\Fiducial_X_MarkerDetection.exe
   Fiducial_X_MarkerDetection.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\Fiducial_X_MarkerDetection\x64\Debug\Fiducial_X_MarkerDetection.pdb (Partial PDB)
