@@ -16,17 +16,18 @@ public:
 	//Member Functions
 	void readImage(const string & filepath);
 	void showImage(bool show);
-	/*//Accessors
+	bool checkifFileExists(const string & filepath);
+	//Accessors
 	Mat getImage() const;
 	//Mutators
-	void setImage(Mat image);*/
+	//void setImage(Mat image);
 
 	//Destructor
 	~fileOperations();
 
 private:
 	Mat image;
-	bool show;
+	bool show, fileExists;
 	string filepath;
 };
 
