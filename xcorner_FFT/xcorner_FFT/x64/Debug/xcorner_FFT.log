@@ -2,7 +2,6 @@
 c:\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
 c:\users\jai\documents\opencv_c-\xcorner_fft\xcorner_fft\xcorner_fft.cpp(26): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
-c:\users\jai\documents\opencv_c-\xcorner_fft\xcorner_fft\xcorner_fft.cpp(44): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
-c:\users\jai\documents\opencv_c-\xcorner_fft\xcorner_fft\xcorner_fft.cpp(54): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\jai\documents\opencv_c-\xcorner_fft\xcorner_fft\xcorner_fft.cpp(23): warning C4101: 'FFTMagnitude': unreferenced local variable
   xcorner_FFT.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\xcorner_FFT\x64\Debug\xcorner_FFT.exe
   xcorner_FFT.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\xcorner_FFT\x64\Debug\xcorner_FFT.pdb (Partial PDB)

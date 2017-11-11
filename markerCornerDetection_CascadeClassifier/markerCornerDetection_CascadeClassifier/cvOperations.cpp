@@ -13,6 +13,7 @@ cvOperations::cvOperations(fileOperations & fileOperationsObject)
 
 cvOperations::~cvOperations()
 {
+	destroyAllWindows();
 }
 
 void cvOperations::detectObjects()

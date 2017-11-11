@@ -26,10 +26,9 @@ int main(int argc, char** argv)
 	imageOperationsObject.showImage(0);
 	imageOperationsObject.setclassifierFilePath(classifierFilePath);
 	imageOperationsObject.detectObjects();
-	imageOperationsObject.showDetectedObjects(0);
+	imageOperationsObject.showDetectedObjects(1);
 	
-	endTime = GetTickCount();
-	destroyAllWindows();
+	endTime = GetTickCount();	
 	cout << "Time elapsed: " << endTime - startTime << "ms\n";
 	system("pause");
     return 0;

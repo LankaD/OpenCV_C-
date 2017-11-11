@@ -23,6 +23,56 @@ void trainMultiClassSVM(const vector<Mat>& features, const vector<int>& labels);
 void svmPredictImage(vector<Mat>& testImages, Size& imageSize);
 Size imageSize(100, 100);
 
+int main(int argc, char**argv)
+{
+	vector<Mat> testImages;
+	Mat testImage;
+	//Declaring variables
+	vector<Mat> blackMarkerImages, whiteMarkerImages, backgroundImages, blackMarkerHOGFeatures, whiteMarkerHOGFeatures, backgroundImagesHOGFeatures, featuredescriptors;
+	Size wSize = Size(96, 96);
+	vector <int> labels;
+	bool filePathIsCorrect_blackMarker = 0, filePathIsCorrect_whiteMarker = 0, filePathIsCorrect_background = 0;
+
+	const string blackMarkerImages_filepath = "E:\\GAC_Files\\Markers\\SVMTraining\\blackMarker";//black markers with white background
+	const string whiteMarkerImages_filepath = "E:\\GAC_Files\\Markers\\SVMTraining\\whiteMarker";//white markers with black background
+	const string backgroundImages_filepath = "E:\\GAC_Files\\Markers\\SVMTraining\\background";//background images
+
+																							   //Initializing file paths
+	filePathIsCorrect_blackMarker = checkPath(blackMarkerImages_filepath);//black markers with white background
+	filePathIsCorrect_whiteMarker = checkPath(whiteMarkerImages_filepath);//white markers with black background
+	filePathIsCorrect_background = checkPath(backgroundImages_filepath); //background images
+
+																		 //File path validation and reading image files from valid file paths'
+	if (filePathIsCorrect_blackMarker && filePathIsCorrect_whiteMarker && filePathIsCorrect_background)
+	{
+		loadImagesFromDirectory(blackMarkerImages_filepath, blackMarkerImages);
+		labels.assign(blackMarkerImages.size(), 0);
+		cout << "The total number of black marker images loaded are: " << blackMarkerImages.size() << endl;
+
+		loadImagesFromDirectory(whiteMarkerImages_filepath, whiteMarkerImages);
+		labels.insert(labels.end(), whiteMarkerImages.size(), +1);
+		cout << "The total number of white marker images loaded are: " << whiteMarkerImages.size() << endl;
+
+		loadImagesFromDirectory(backgroundImages_filepath, backgroundImages);
+		labels.insert(labels.end(), backgroundImages.size(), -1);
+		cout << "The total number of background images loaded are: " << backgroundImages.size() << endl;
+	}
+
+	//Computing the HOG Features for the images
+	computeHOGFeatures(blackMarkerImages, featuredescriptors, Size(96, 96));//black markers with white background
+	computeHOGFeatures(whiteMarkerImages, featuredescriptors, Size(96, 96));//white markers with black background
+	computeHOGFeatures(backgroundImages, featuredescriptors, Size(96, 96));//background images
+	trainMultiClassSVM(featuredescriptors, labels);
+	/*
+	//testImage = imread("D:\\Markers_UsedForTraining\\SVMTraining\\background\\19161.png", IMREAD_UNCHANGED);
+	testImage = imread("D:\\Markers\\Markers_With_White_Backgrounds\\Negative\\1.png", IMREAD_GRAYSCALE);
+	//testImage = imread("D:\\Markers\\Markers_With_White_Backgrounds\\img.png", IMREAD_GRAYSCALE);
+	testImages.push_back(testImage);
+	//svmPredictImage(testImages, imageSize);*/
+	system("pause");
+	return 0;
+}
+
 bool checkPath(const string& filepath)
 {
 	DWORD checkFileExists = GetFileAttributesA(filepath.c_str());
@@ -156,53 +206,5 @@ void svmPredictImage(vector<Mat>& testImages, Size& imageSize)
 	}
 }
 
-int main(int argc, char**argv)
-{
-	vector<Mat> testImages;
-	Mat testImage;
-	//Declaring variables
-	vector<Mat> blackMarkerImages, whiteMarkerImages, backgroundImages, blackMarkerHOGFeatures, whiteMarkerHOGFeatures, backgroundImagesHOGFeatures, featuredescriptors;
-	Size wSize = Size(96, 96);
-	vector <int> labels;
-	bool filePathIsCorrect_blackMarker = 0, filePathIsCorrect_whiteMarker = 0, filePathIsCorrect_background = 0;
 
-	const string blackMarkerImages_filepath = "E:\\GAC_Files\\Markers\\SVMTraining\\blackMarker";//black markers with white background
-	const string whiteMarkerImages_filepath = "E:\\GAC_Files\\Markers\\SVMTraining\\whiteMarker";//white markers with black background
-	const string backgroundImages_filepath = "E:\\GAC_Files\\Markers\\SVMTraining\\background";//background images
-
-	//Initializing file paths
-	filePathIsCorrect_blackMarker = checkPath(blackMarkerImages_filepath);//black markers with white background
-	filePathIsCorrect_whiteMarker = checkPath(whiteMarkerImages_filepath);//white markers with black background
-	filePathIsCorrect_background = checkPath(backgroundImages_filepath); //background images
-
-	 //File path validation and reading image files from valid file paths'
-	if (filePathIsCorrect_blackMarker && filePathIsCorrect_whiteMarker && filePathIsCorrect_background)
-	{
-		loadImagesFromDirectory(blackMarkerImages_filepath, blackMarkerImages);
-		labels.assign(blackMarkerImages.size(), 0);
-		cout << "The total number of black marker images loaded are: " << blackMarkerImages.size() << endl;
-
-		loadImagesFromDirectory(whiteMarkerImages_filepath, whiteMarkerImages);
-		labels.insert(labels.end(), whiteMarkerImages.size(), +1);
-		cout << "The total number of white marker images loaded are: " << whiteMarkerImages.size() << endl;
-
-		loadImagesFromDirectory(backgroundImages_filepath, backgroundImages);
-		labels.insert(labels.end(), backgroundImages.size(), -1);
-		cout << "The total number of background images loaded are: " << backgroundImages.size() << endl;
-	}
-
-	//Computing the HOG Features for the images
-	computeHOGFeatures(blackMarkerImages, featuredescriptors, Size(96, 96));//black markers with white background
-	computeHOGFeatures(whiteMarkerImages, featuredescriptors, Size(96, 96));//white markers with black background
-	computeHOGFeatures(backgroundImages, featuredescriptors, Size(96, 96));//background images
-	trainMultiClassSVM(featuredescriptors, labels);
-	/*
-	//testImage = imread("D:\\Markers_UsedForTraining\\SVMTraining\\background\\19161.png", IMREAD_UNCHANGED);
-	testImage = imread("D:\\Markers\\Markers_With_White_Backgrounds\\Negative\\1.png", IMREAD_GRAYSCALE);
-	//testImage = imread("D:\\Markers\\Markers_With_White_Backgrounds\\img.png", IMREAD_GRAYSCALE);
-	testImages.push_back(testImage);
-	//svmPredictImage(testImages, imageSize);*/
-	system("pause");
-	return 0;
-}
 
