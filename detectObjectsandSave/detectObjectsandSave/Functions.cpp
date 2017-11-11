@@ -90,7 +90,7 @@ void markerClassifierDetection(vector<Mat>& images, const string& classifierPath
 			}
 			if (showDetectedObjects)
 			{
-				for (vector<Rect>::iterator r = boundingBoxInfo.begin(); r != boundingBoxInfo.end(); ++r)
+				for (auto r = boundingBoxInfo.begin(); r != boundingBoxInfo.end(); ++r)
 				{
 					Rect objectBoundary = (*r);
 					rectangle(*i, objectBoundary, color, 2, 8, 0);
@@ -125,7 +125,7 @@ void cornerGuessInSegment(Mat& image, vector<Rect>& boundingBox, vector<Point2f>
 {
 	Point2f cornerGuess;
 	float x = 0, y = 0;
-	for (vector<Rect>::iterator c = boundingBox.begin(); c != boundingBox.end(); c++)
+	for (auto c = boundingBox.begin(); c != boundingBox.end(); c++)
 	{
 		x = c->x + (c->width / 2);
 		y = c->y + (c->height / 2);
@@ -160,7 +160,7 @@ void cornersDetection(const Mat& image, bool showDetectedCorners)
 //This function extracts ROI from an image when the bounding rectangle origin, width and height is given
 void extractObjectROI(const Mat& image, vector<Rect>& boundingBoxInfo, bool showROI)
 {
-	for (vector<Rect>::iterator r = boundingBoxInfo.begin(); r != boundingBoxInfo.end(); ++r)
+	for (auto r = boundingBoxInfo.begin(); r != boundingBoxInfo.end(); ++r)
 	{
 		Rect ROI(r->x, r->y, r->width, r->height);
 		Mat imageROI = image(ROI);

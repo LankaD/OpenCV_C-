@@ -1,13 +1,9 @@
-﻿  detectObjectsandSave.cpp
-c:\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
-  c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
-  Functions.cpp
+﻿  Functions.cpp
 c:\opencv\build\include\opencv2\flann\logger.h(66): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
   c:\program files (x86)\windows kits\10\include\10.0.15063.0\ucrt\stdio.h(207): note: see declaration of 'fopen'
 c:\users\jai\documents\opencv_c-\detectobjectsandsave\detectobjectsandsave\functions.cpp(29): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
 c:\users\jai\documents\opencv_c-\detectobjectsandsave\detectobjectsandsave\functions.cpp(130): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
 c:\users\jai\documents\opencv_c-\detectobjectsandsave\detectobjectsandsave\functions.cpp(131): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
-  Generating Code...
 c:\users\jai\documents\opencv_c-\detectobjectsandsave\detectobjectsandsave\functions.cpp(21): warning C4715: 'checkPath': not all control paths return a value
   detectObjectsandSave.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\detectObjectsandSave\x64\Debug\detectObjectsandSave.exe
   detectObjectsandSave.vcxproj -> C:\Users\JAI\Documents\OpenCV_C-\detectObjectsandSave\x64\Debug\detectObjectsandSave.pdb (Partial PDB)
