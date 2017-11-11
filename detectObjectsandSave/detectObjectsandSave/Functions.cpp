@@ -72,7 +72,7 @@ void markerClassifierDetection(vector<Mat>& images, const string& classifierPath
 
 			if (saveImageSegments)
 			{
-				for (vector<Rect>::iterator r = boundingBoxInfo.begin(); r != boundingBoxInfo.end(); ++r)
+				for (auto r = boundingBoxInfo.begin(); r != boundingBoxInfo.end(); ++r)
 				{
 					Rect objectBoundary = (*r);
 					imageSegment = image(objectBoundary);
